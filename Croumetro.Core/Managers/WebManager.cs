@@ -34,7 +34,12 @@ namespace Croumetro.Core.Managers
         public bool IsNetworkAvailable => NetworkInterface.GetIsNetworkAvailable();
 
         public static CroudiaAuthEntity AuthEntity { get; set; }
-        public async Task<Result> PostData(Uri uri, HttpContent content)
+        public CroudiaAuthEntity GetAuthEntity()
+        {
+            return AuthEntity;
+        }
+
+        public async virtual Task<Result> PostData(Uri uri, HttpContent content)
         {
             var httpClient = new HttpClient();
             try
@@ -63,7 +68,7 @@ namespace Croumetro.Core.Managers
             throw new NotImplementedException();
         }
 
-        public async Task<Result> GetData(Uri uri)
+        public async virtual Task<Result> GetData(Uri uri)
         {
             var httpClient = new HttpClient();
 

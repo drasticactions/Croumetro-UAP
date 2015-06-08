@@ -38,5 +38,13 @@ namespace Croumetro.Database.Repos
                 return await db.UserRepository.Create(user) > 0;
             }
         }
+
+        public async Task<CroudiaAuthEntity> GetDefaultUserEntity()
+        {
+            using (var db = new UserDataSource())
+            {
+                return await db.CroudiaAuthRepository.Items.Where(node => node.IsDefault).FirstOrDefaultAsync();
+            }
+        }
     }
 }

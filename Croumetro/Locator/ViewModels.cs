@@ -20,5 +20,7 @@ namespace Croumetro.Locator
             }
         }
         public static LoginPageViewModel LoginPageVm => App.Container.Resolve<LoginPageViewModel>();
+
+        public static MainPageViewModel MainPageVm => App.Container.Resolve<MainPageViewModel>();
     }
 }

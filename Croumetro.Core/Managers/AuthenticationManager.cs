@@ -54,7 +54,8 @@ namespace Croumetro.Core.Managers
             {
                 ["grant_type"] = "refresh_token",
                 ["client_id"] = Constants.ConsumerKey,
-                ["client_secret"] = Constants.ConsumerSecret
+                ["client_secret"] = Constants.ConsumerSecret,
+                ["refresh_token"] = authEntity.RefreshToken
             };
 
             var result = await _webManager.PostData(new Uri(EndPoints.OauthToken), new FormUrlEncodedContent(dic));
@@ -69,7 +70,6 @@ namespace Croumetro.Core.Managers
 
         public async Task<UserEntity> VerifyAccount(CroudiaAuthEntity authEntity)
         {
-            _webManager = new WebManager(authEntity);
             var result = await _webManager.GetData(new Uri(EndPoints.AccountVerify));
             if (!result.IsSuccess)
             {

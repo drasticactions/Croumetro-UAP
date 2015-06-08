@@ -7,6 +7,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -73,7 +74,7 @@ namespace Croumetro
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
-
+            SystemNavigationManager.GetForCurrentView().BackRequested += BackPressed;
             RootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
@@ -99,7 +100,7 @@ namespace Croumetro
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                RootFrame.Navigate(typeof(LoginPage), e.Arguments);
+                RootFrame.Navigate(typeof(MainPage), e.Arguments);
             }
             // Ensure the current window is active
             Window.Current.Activate();
@@ -113,6 +114,18 @@ namespace Croumetro
         void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
+        }
+
+        private void BackPressed(object sender, BackRequestedEventArgs e)
+        {
+            if (RootFrame == null)
+            {
+                return;
+            }
+
+            if (!RootFrame.CanGoBack) return;
+            RootFrame.GoBack();
+            e.Handled = true;
         }
 
         /// <summary>

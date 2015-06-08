@@ -5,6 +5,7 @@
     xmlns:local="using:Croumetro.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    RequestedTheme="Light"
     DataContext="{Binding Source={StaticResource Locator}, Path=LoginPageVm}"
     mc:Ignorable="d">
 
@@ -17,7 +18,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock VerticalAlignment="Center" TextAlignment="Center"  Style="{StaticResource HeaderTextBlockStyle}">
-            クローメットロ
+            Croumetro
         </TextBlock>
         <Grid Grid.Row="1">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">

@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using PropertyChanged;
 using SQLite.Net.Attributes;
 
 namespace Croumetro.Core.Entities.User
 {
+    [ImplementPropertyChanged]
     public class UserEntity
     {
         [JsonProperty("cover_image_url_https")]

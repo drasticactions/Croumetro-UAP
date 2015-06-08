@@ -12,6 +12,9 @@ namespace Croumetro.Core.Interfaces
     public interface IWebManager
     {
         bool IsNetworkAvailable { get; }
+
+        CroudiaAuthEntity GetAuthEntity();
+
         Task<WebManager.Result> PostData(Uri uri, HttpContent content);
 
         Task<WebManager.Result> PutData(Uri uri, StringContent json);

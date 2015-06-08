@@ -5,17 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Security.Authentication.Web;
+using Croumetro.Commands.Navigation;
 using Croumetro.Common;
 using Croumetro.Core.Interfaces;
 using Croumetro.Core.Managers;
 using Croumetro.Core.Tools;
 using Croumetro.Database.Repos;
+using Croumetro.Tools.Manager;
 
 namespace Croumetro.ViewModels
 {
     public class LoginPageViewModel : NotifierBase
     {
-        private readonly IAuthenticationManager _authManager;
+        private IAuthenticationManager _authManager;
 
         public LoginPageViewModel()
         {
@@ -26,6 +28,8 @@ namespace Croumetro.ViewModels
 
         public bool CanClickLoginButton => !IsLoading;
 
+        public ToMainPage ToMainPage { get; set; } = new ToMainPage();
+
         public AsyncDelegateCommand ClickLoginButtonCommand { get; private set; }
 
         public event EventHandler<EventArgs> LoginSuccessful;
@@ -35,7 +39,7 @@ namespace Croumetro.ViewModels
             "https://api.croudia.com/oauth/authorize?response_type=code&client_id=88af26dcf4225aa781c7d58af5c6f6aa5e3a4d64f8ddfb31d86bc5a663efed61&state=77f094743bdb55c0f97";
 
         private string _callback = "https://sites.google.com/site/slowbeeflogin/";
-        private UserDatabase _userDatabase = new UserDatabase();
+        private readonly UserDatabase _userDatabase = new UserDatabase();
 
         public async Task ClickLoginButton()
         {
@@ -65,6 +69,7 @@ namespace Croumetro.ViewModels
                         }
                         else
                         {
+                            _authManager = new AuthenticationManager(new ClientWebManager(authEntity));
                             var user = await _authManager.VerifyAccount(authEntity);
                             if (user == null)
                             {
