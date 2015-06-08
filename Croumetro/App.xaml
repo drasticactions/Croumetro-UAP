@@ -1,0 +1,17 @@
+﻿<Application
+    x:Class="Croumetro.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Croumetro"
+    xmlns:locator="using:Croumetro.Locator"
+    RequestedTheme="Light">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/Style.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <locator:ViewModels x:Name="Locator" />
+            <SolidColorBrush x:Key="AwfulGreen" Color="#3CC690"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
