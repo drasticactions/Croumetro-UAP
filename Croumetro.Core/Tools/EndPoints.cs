@@ -14,6 +14,9 @@ namespace Croumetro.Core.Tools
 
         public static readonly string OauthAuthorize = Croudia + "oauth/authorize";
 
+        //Timeline
+        public static readonly string PublicTimeline = Croudia + "statuses/public_timeline.json";
+
         //Account
         public static readonly string AccountVerify = Croudia + "account/verify_credentials.json";
     }

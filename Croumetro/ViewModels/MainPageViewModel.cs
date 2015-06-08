@@ -69,7 +69,7 @@ namespace Croumetro.ViewModels
                 {
                     Icon = "\uE7F8",
                     Name = "ホーム",
-                    //Command = new NavigateToMainForumsPage()
+                    Command = new ToHomePage()
                 },
                 new MenuItem()
                 {

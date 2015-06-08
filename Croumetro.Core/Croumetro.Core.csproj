@@ -112,10 +112,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Entities\CroudiaAuthEntity.cs" />
+    <Compile Include="Entities\Status\Entities.cs" />
+    <Compile Include="Entities\Status\Media.cs" />
+    <Compile Include="Entities\Status\Source.cs" />
+    <Compile Include="Entities\Status\StatusEntity.cs" />
     <Compile Include="Entities\User\UserEntity.cs" />
     <Compile Include="Interfaces\IAuthenticationManager.cs" />
     <Compile Include="Interfaces\IWebManager.cs" />
     <Compile Include="Managers\AuthenticationManager.cs" />
+    <Compile Include="Managers\StatusManager.cs" />
     <Compile Include="Managers\WebManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tools\Constants.cs" />

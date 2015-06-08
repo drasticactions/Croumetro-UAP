@@ -12,6 +12,7 @@ namespace Croumetro.Common
             // Register View Models
             builder.RegisterType<LoginPageViewModel>().SingleInstance();
             builder.RegisterType<MainPageViewModel>().SingleInstance();
+            builder.RegisterType<HomePageViewModel>().SingleInstance();
             //builder.RegisterType<MainPage>();
             return builder.Build();
         }

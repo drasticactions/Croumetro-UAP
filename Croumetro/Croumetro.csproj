@@ -95,6 +95,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Commands\Navigation\ToHomePage.cs" />
     <Compile Include="Commands\Navigation\ToLoginPage.cs" />
     <Compile Include="Commands\Navigation\ToMainPage.cs" />
     <Compile Include="Common\AlwaysExecutableCommand.cs" />
@@ -107,6 +108,12 @@
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Locator\ViewModels.cs" />
+    <Compile Include="Pages\Individual\StatusPage.xaml.cs">
+      <DependentUpon>StatusPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\List\HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
@@ -118,6 +125,8 @@
     <Compile Include="Tools\Layout\StatusBarBehavior.cs" />
     <Compile Include="Tools\Manager\ClientWebManager.cs" />
     <Compile Include="Tools\Models\MenuItem.cs" />
+    <Compile Include="Tools\Models\Scrolling\HomeScrollingCollection.cs" />
+    <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
   </ItemGroup>
@@ -171,6 +180,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Pages\Individual\StatusPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\List\HomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
