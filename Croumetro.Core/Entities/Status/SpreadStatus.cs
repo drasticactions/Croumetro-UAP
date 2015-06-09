@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Croumetro.Core.Entities.User;
+﻿using Croumetro.Core.Entities.User;
 using Newtonsoft.Json;
-using SQLite.Net.Attributes;
 
 namespace Croumetro.Core.Entities.Status
 {
-    public class StatusEntity
+
+    public class SpreadStatus
     {
-        [PrimaryKey]
+
         [JsonProperty("id")]
         public int Id { get; set; }
 
@@ -54,17 +49,11 @@ namespace Croumetro.Core.Entities.Status
         [JsonProperty("in_reply_to_screen_name")]
         public object InReplyToScreenName { get; set; }
 
-        [JsonProperty("source")]
-        public Source Source { get; set; }
-
         [JsonProperty("user")]
         public UserEntity User { get; set; }
 
-        [JsonProperty("spread_status")]
-        public SpreadStatus SpreadStatus { get; set; }
-
-        public bool IsSpreaded => SpreadStatus != null;
-
-        public bool HasMedia => Entities?.Media != null;
+        [JsonProperty("source")]
+        public Source Source { get; set; }
     }
+
 }

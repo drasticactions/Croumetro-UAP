@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
+using Windows.Storage.Pickers;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -12,6 +14,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using Croumetro.Common;
 using Croumetro.Tools.Models;
@@ -72,6 +75,30 @@ namespace Croumetro.Pages
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Splitter.IsPaneOpen = (Splitter.IsPaneOpen != true);
+        }
+
+        private async void Picture_OnClick(object sender, RoutedEventArgs e)
+        {
+            var openPicker = new FileOpenPicker
+            {
+                ViewMode = PickerViewMode.Thumbnail,
+                SuggestedStartLocation = PickerLocationId.PicturesLibrary
+            };
+            openPicker.FileTypeFilter.Add(".jpg");
+            openPicker.FileTypeFilter.Add(".jpeg");
+            openPicker.FileTypeFilter.Add(".png");
+            openPicker.FileTypeFilter.Add(".gif");
+            var file = await openPicker.PickSingleFileAsync();
+            if (file == null) return;
+            if (!file.ContentType.Contains("image"))
+            {
+                return;
+            }
+            Locator.ViewModels.MainPageVm.ImageFile = file;
+            var stream = await file.OpenAsync(FileAccessMode.Read);
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.SetSource(stream);
+            SelectedImage.Source = bitmap;
         }
 
         private void RootFrameOnNavigated(object sender, NavigationEventArgs navigationEventArgs)

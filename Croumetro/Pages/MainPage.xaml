@@ -8,11 +8,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:layout="using:Croumetro.Tools.Layout"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     DataContext="{Binding Source={StaticResource Locator}, Path=MainPageVm}"
     mc:Ignorable="d">
     <interactivity:Interaction.Behaviors>
         <layout:StatusBarBehavior IsVisible="True"
-                                 BackgroundColor="#3CC690"
+                                 BackgroundColor="#3387A1"
                                  ForegroundColor="White"/>
     </interactivity:Interaction.Behaviors>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -49,7 +50,7 @@
         </Grid.RowDefinitions>
         <SplitView x:Name="Splitter" VerticalAlignment="Stretch">
             <SplitView.Pane>
-                <RelativePanel RequestedTheme="Dark" VerticalAlignment="Stretch" Background="#3CC690">
+                <RelativePanel RequestedTheme="Dark" VerticalAlignment="Stretch" Background="#3387A1">
                     <ListView ItemClick="MenuClick"  ItemsSource="{Binding MenuItems}" IsItemClickEnabled="True" 
                  SelectionMode="None" HorizontalAlignment="Left"
                  VerticalAlignment="Top" Margin="-2,40,0,0" >
@@ -66,6 +67,28 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
+                    <Grid Width="250" Margin="50,0,0,0" RelativePanel.AlignBottomWithPanel="True">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="100"/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
+                        <Grid HorizontalAlignment="Stretch" Grid.Row="0">
+                            <TextBox Canvas.ZIndex="1" AcceptsReturn="True" Opacity=".9" TextWrapping="Wrap" Text="{Binding StatusMessage, Mode=TwoWay}" FontSize="16"/>
+                            <Image  Canvas.ZIndex="0" x:Name="SelectedImage"/>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <StackPanel Orientation="Horizontal">
+                                <AppBarButton Click="Picture_OnClick" Icon="Pictures"/>
+                                <Button Margin="5,0,0,0">ささやく
+                                    <interactivity:Interaction.Behaviors>
+                                        <core:EventTriggerBehavior EventName="Click">
+                                            <core:InvokeCommandAction Command="{Binding UpdateStatusWithMediaCommand}" />
+                                        </core:EventTriggerBehavior>
+                                    </interactivity:Interaction.Behaviors>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
                 </RelativePanel>
             </SplitView.Pane>
             <SplitView.Content>

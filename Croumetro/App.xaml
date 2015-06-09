@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Croumetro"
     xmlns:locator="using:Croumetro.Locator"
+    xmlns:converters="using:Croumetro.Tools.Converters"
     RequestedTheme="Light">
     <Application.Resources>
         <ResourceDictionary>
@@ -11,7 +12,9 @@
                 <ResourceDictionary Source="/Styles/Style.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <locator:ViewModels x:Name="Locator" />
-            <SolidColorBrush x:Key="AwfulGreen" Color="#3CC690"/>
+            <SolidColorBrush x:Key="AwfulGreen" Color="#3387A1"/>
+            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <converters:ScreennameConverter x:Key="ScreennameConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

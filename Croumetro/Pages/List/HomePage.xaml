@@ -6,10 +6,84 @@
     xmlns:local="using:Croumetro.Pages.List"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-     DataContext="{Binding Source={StaticResource Locator}, Path=HomePageVm}"
+    xmlns:converters="using:Croumetro.Tools.Converters"
+    DataContext="{Binding Source={StaticResource Locator}, Path=HomePageVm}"
     mc:Ignorable="d">
+       <Page.Resources>
+        <converters:TimelineTemplateSelector x:Name="TimelineTemplateSelector"
+                                        TimelineActivityDataTemplate="{StaticResource TimelineDataTemplate}"
+                                        SpreadTimelineDataTemplate="{StaticResource SpreadTimelineDataTemplate}"/>
+    </Page.Resources>
+    <Grid Background="#D2E0ED">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="AdaptiveStates"
+                              CurrentStateChanged="AdaptiveStates_CurrentStateChanged">
+                <VisualState x:Name="DefaultState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="800" />
+                    </VisualState.StateTriggers>
+                </VisualState>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
 
+                    <VisualState.Setters>
+                        <Setter Target="MasterColumn.Width" Value="*" />
+                        <Setter Target="DetailColumn.Width" Value="0" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid x:Name="grid1" Background="{StaticResource AwfulGreen}" RequestedTheme="Dark">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Margin="5,0,0,0" x:Name="pageTitle" Text="ホーム" FontWeight="Bold" Style="{StaticResource TagLineTextStyle}" Grid.Column="1"
+                       IsHitTestVisible="false" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+        </Grid>
+        <Grid x:Name="MasterListView" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="MasterColumn" Width="450" />
+                <ColumnDefinition x:Name="DetailColumn" Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ChildrenTransitions>
+                    <TransitionCollection>
+                        <EntranceThemeTransition/>
+                    </TransitionCollection>
+                </Grid.ChildrenTransitions>
+                <Grid Canvas.ZIndex="1" Visibility="{Binding HomeScrollingCollection.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" >
+                    <ProgressBar VerticalAlignment="Center" IsIndeterminate="True" Height="50"/>
+                    <Rectangle Fill="White" Opacity=".5"/>
+                </Grid>
+                <ListView 
+                    ItemTemplateSelector="{StaticResource TimelineTemplateSelector}"
+                    ItemsSource="{Binding HomeScrollingCollection}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </Grid>
+            <Grid
+            x:Name="DetailContentPresenter"
+            Grid.Column="1"
+            Grid.RowSpan="2">
+                
+               </Grid>
+        </Grid>
     </Grid>
 </Page>

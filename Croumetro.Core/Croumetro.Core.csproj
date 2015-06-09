@@ -115,6 +115,7 @@
     <Compile Include="Entities\Status\Entities.cs" />
     <Compile Include="Entities\Status\Media.cs" />
     <Compile Include="Entities\Status\Source.cs" />
+    <Compile Include="Entities\Status\SpreadStatus.cs" />
     <Compile Include="Entities\Status\StatusEntity.cs" />
     <Compile Include="Entities\User\UserEntity.cs" />
     <Compile Include="Interfaces\IAuthenticationManager.cs" />

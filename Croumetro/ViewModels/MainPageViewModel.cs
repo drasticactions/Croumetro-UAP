@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
+using Windows.Storage.Streams;
 using Croumetro.Commands.Navigation;
+using Croumetro.Commands.Status;
 using Croumetro.Common;
 using Croumetro.Core.Entities;
 using Croumetro.Core.Entities.User;
@@ -20,9 +23,30 @@ namespace Croumetro.ViewModels
         private AuthenticationManager _authManager;
         private UserEntity _user;
         private CroudiaAuthEntity _authEntity;
-
+        private string _statusMessage;
+        private StorageFile _imageFile;
         public ToLoginPage ToLoginPage { get; set; } = new ToLoginPage();
 
+        public UpdateStatusWithMediaCommand UpdateStatusWithMediaCommand { get; set; } =
+            new UpdateStatusWithMediaCommand();
+        public StorageFile ImageFile
+        {
+            get { return _imageFile; }
+            set
+            {
+                SetProperty(ref _imageFile, value);
+                OnPropertyChanged();
+            }
+        }
+        public string StatusMessage
+        {
+            get { return _statusMessage; }
+            set
+            {
+                SetProperty(ref _statusMessage, value);
+                OnPropertyChanged();
+            }
+        }
         public UserEntity User
         {
             get { return _user; }
